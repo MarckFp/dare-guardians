@@ -1,0 +1,32 @@
+service: dare-guardians-bot
+
+provider:
+  name: aws
+  runtime: python3.11
+  architecture: arm64
+  stage: production
+  region: eu-west-1
+  deploymentBucket:
+    serverSideEncryption: AES256
+    blockPublicAccess: true
+
+package:
+  individually: true
+  patterns:
+    - "!./**"
+
+functions:
+  guardians-listen:
+    handler: main.handler
+    memorySize: 256
+    timeout: 120
+    environment:
+      TELEGRAM_TOKEN: ${env:TELEGRAM_TOKEN}
+      GAME_PASSWORD: ${env:GAME_PASSWORD}
+    url: true
+    package:
+      patterns:
+        - "main.py"
+
+plugins:
+  - serverless-python-requirements
