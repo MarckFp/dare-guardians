@@ -1,3 +1,4 @@
+import os
 import boto3
 
 def join_game(chat_id, message, first_name, last_name, username):
@@ -7,7 +8,7 @@ def join_game(chat_id, message, first_name, last_name, username):
     #TODO: Add some type of rate limit by chat_id
     input_password = message.split(" ")[1]
     if input_password == GAME_PASSWORD:
-        response = f"Has sido registrado correctamente en el juego {first_name}! La semana que viene empezará tu primer reto, juega limpio y diviertete =)"
+        response = f"¡Has sido registrado correctamente en el juego {first_name}! La semana que viene empezará tu primer reto, juega limpio y diviertete =)"
         boto_response = client.put_item(
             TableName=DYNAMO_TABLE,
             Item={

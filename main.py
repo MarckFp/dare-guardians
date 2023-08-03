@@ -17,7 +17,7 @@ def handler(event, context):
         response = f"Porfavor escribe /start para empezar, {first_name}"
 
         if "/start" in message:
-            response = f"Hola {first_name}!\n Esto es Dare Guardians, un entretenido juego de retos con el que poder jugar con tus amigos. La idea del juego es simple, hay una serie de guardianes y un infiltrado, una vez a la semana un reto nuevo sale a la luz y se escoge un infiltrado al azar. El resto actuaran como guardianes. La idea es intentar completar el reto sin que nadie se de cuenta.\n\n/subscribe - Para poder empezar a jugar a Dare Guardians escribe el comando seguido de un espacio y el ID de tu grupo\n/rules - Para entender mejor las reglas (WIP)\n/create - Para crear un grupo de guardianes (WIP)\n/exit - Para salir del juego (WIP)"
+            response = f"¡Hola {first_name}!\nEsto es Dare Guardians, un entretenido juego de retos con el que poder jugar con tus amigos. La idea del juego es simple, hay una serie de guardianes y un infiltrado, una vez a la semana un reto nuevo sale a la luz y se escoge un infiltrado al azar. El resto actuaran como guardianes. La idea es intentar completar el reto sin que nadie se de cuenta.\n\n/join - Para poder empezar a jugar a Dare Guardians escribe el comando seguido de un espacio y el ID de tu grupo\n/rules - Para entender mejor las reglas (WIP)\n/create - Para crear un grupo de guardianes (WIP)\n/exit - Para salir del juego (WIP)"
 
         if "/join" in message:
             response = join_game(chat_id, message, first_name, last_name, username)
