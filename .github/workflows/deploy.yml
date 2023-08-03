@@ -4,7 +4,12 @@ on:
   release:
     types: [published]
 env:
-  IMAGE_NAME: ${{ github.repository }}
+  TELEGRAM_TOKEN: ${{ vars.TELEGRAM_TOKEN }}
+  DYNAMO_TABLE: ${{ vars.DYNAMO_TABLE }}
+  AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ vars.AWS_SECRET_ACCESS_KEY }}
+  AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
+  GAME_PASSWORD: ${{ vars.GAME_PASSWORD }}
 jobs:
   Deploy:
     runs-on: ubuntu-latest
