@@ -1,4 +1,4 @@
-name: Deplou
+name: Deploy
 run-name: ${{ github.actor }} is dpeloying the app 🚀
 on:
   release:
