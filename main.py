@@ -1,13 +1,10 @@
 import os
 import json
 import requests
-import boto3
+from commands.join import join_game
 
 TOKEN = os.getenv('TELEGRAM_TOKEN')
-GAME_PASSWORD = os.getenv('GAME_PASSWORD')
-DYNAMO_TABLE = os.getenv('DYNAMO_TABLE')
 BASE_URL = f"https://api.telegram.org/bot{TOKEN}"
-client = boto3.client('dynamodb')
 
 def handler(event, context):
     try:
@@ -20,35 +17,10 @@ def handler(event, context):
         response = f"Porfavor escribe /start para empezar, {first_name}"
 
         if "/start" in message:
-            response = f"Hola {first_name}! Para poder empezar a jugar a Dare Guardians escribe /subscribe seguido de un espacio y la constraseña"
+            response = f"Hola {first_name}!\n Esto es Dare Guardians, un entretenido juego de retos con el que poder jugar con tus amigos. La idea del juego es simple, hay una serie de guardianes y un infiltrado, una vez a la semana un reto nuevo sale a la luz y se escoge un infiltrado al azar. El resto actuaran como guardianes. La idea es intentar completar el reto sin que nadie se de cuenta.\n\n/subscribe - Para poder empezar a jugar a Dare Guardians escribe el comando seguido de un espacio y el ID de tu grupo\n/rules - Para entender mejor las reglas (WIP)\n/create - Para crear un grupo de guardianes (WIP)\n/exit - Para salir del juego (WIP)"
 
-        if "/subscribe" in message:
-            #TODO: Add some type of rate limit by chat_id
-            input_password = message.split(" ")[1]
-            if input_password == GAME_PASSWORD:
-                response = f"Has sido registrado correctamente en el juego {first_name}! La semana que viene empezará tu primer reto, juega limpio y diviertete =)"
-                boto_response = client.put_item(
-                    TableName=DYNAMO_TABLE,
-                    Item={
-                        'chat_id': {
-                            'S': str(chat_id)
-                        },
-                        'username': {
-                            'S': username
-                        },
-                        'first_name': {
-                            'S': first_name
-                        },
-                        'last_name': {
-                            'S': last_name
-                        },
-                        'role': {
-                            'S': 'None'
-                        }
-                    }
-                )
-            else:
-                response = "Contraseña incorrecta"
+        if "/join" in message:
+            response = join_game(chat_id, message, first_name, last_name, username)
 
         data = {"text": response.encode("utf8"), "chat_id": chat_id}
         url = BASE_URL + "/sendMessage"

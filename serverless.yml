@@ -12,16 +12,18 @@ provider:
   environment:
     TELEGRAM_TOKEN: ${env:TELEGRAM_TOKEN}
     DYNAMO_TABLE: ${env:DYNAMO_TABLE}
-  iamRoleStatements:
-    - Effect: "Allow"
-      Action:
-       - dynamodb:Query
-       - dynamodb:Scan
-       - dynamodb:GetItem
-       - dynamodb:PutItem
-       - dynamodb:UpdateItem
-       - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:eu-west-1:${env:AWS_ACCOUNT_ID}:table/${env:DYNAMO_TABLE}"
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: "arn:aws:dynamodb:eu-west-1:${env:AWS_ACCOUNT_ID}:table/${env:DYNAMO_TABLE}"
 
 package:
   individually: true
@@ -39,6 +41,7 @@ functions:
     package:
       patterns:
         - "main.py"
+        - "commands/**"
 
 plugins:
   - serverless-python-requirements
