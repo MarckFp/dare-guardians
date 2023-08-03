@@ -161,6 +161,6 @@ cython_debug/
 
 #Serverless Framework
 .serverless
-.node_modules
+node_modules
 package.json
 package-lock.json
