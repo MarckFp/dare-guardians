@@ -9,6 +9,19 @@ provider:
   deploymentBucket:
     serverSideEncryption: AES256
     blockPublicAccess: true
+  environment:
+    TELEGRAM_TOKEN: ${env:TELEGRAM_TOKEN}
+    DYNAMO_TABLE: ${env:DYNAMO_TABLE}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+       - dynamodb:Query
+       - dynamodb:Scan
+       - dynamodb:GetItem
+       - dynamodb:PutItem
+       - dynamodb:UpdateItem
+       - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:eu-west-1:${env:AWS_ACCOUNT_ID}:table/${env:DYNAMO_TABLE}"
 
 package:
   individually: true
@@ -21,7 +34,6 @@ functions:
     memorySize: 256
     timeout: 120
     environment:
-      TELEGRAM_TOKEN: ${env:TELEGRAM_TOKEN}
       GAME_PASSWORD: ${env:GAME_PASSWORD}
     url: true
     package:

@@ -1,0 +1,22 @@
+name: Deplou
+run-name: ${{ github.actor }} is dpeloying the app 🚀
+on:
+  release:
+    types: [published]
+env:
+  IMAGE_NAME: ${{ github.repository }}
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: pip install -r requirements.txt
+      - run: npm install -g serverless
+      - run: sls plugin install -n serverless-python-requirements
+      - run: sls deploy

@@ -5,6 +5,7 @@ import boto3
 
 TOKEN = os.getenv('TELEGRAM_TOKEN')
 GAME_PASSWORD = os.getenv('GAME_PASSWORD')
+DYNAMO_TABLE = os.getenv('DYNAMO_TABLE')
 BASE_URL = f"https://api.telegram.org/bot{TOKEN}"
 client = boto3.client('dynamodb')
 
@@ -14,6 +15,8 @@ def handler(event, context):
         message = data["message"]["text"]
         chat_id = data["message"]["chat"]["id"]
         first_name = data["message"]["chat"]["first_name"]
+        last_name = data["message"]["chat"]["last_name"]
+        username = data["message"]["chat"]["username"]
         response = f"Porfavor escribe /start para empezar, {first_name}"
 
         if "/start" in message:
@@ -24,7 +27,26 @@ def handler(event, context):
             input_password = message.split(" ")[1]
             if input_password == GAME_PASSWORD:
                 response = f"Has sido registrado correctamente en el juego {first_name}! La semana que viene empezará tu primer reto, juega limpio y diviertete =)"
-                #TODO: Save User in the DynamoDB Table
+                boto_response = client.put_item(
+                    TableName=DYNAMO_TABLE,
+                    Item={
+                        'chat_id': {
+                            'S': str(chat_id)
+                        },
+                        'username': {
+                            'S': username
+                        },
+                        'first_name': {
+                            'S': first_name
+                        },
+                        'last_name': {
+                            'S': last_name
+                        },
+                        'role': {
+                            'S': 'None'
+                        }
+                    }
+                )
             else:
                 response = "Contraseña incorrecta"
 
