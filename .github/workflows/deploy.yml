@@ -1,8 +1,10 @@
 name: Deploy
-run-name: ${{ github.actor }} is dpeloying the app 🚀
+run-name: ${{ github.actor }} is deploying the app 🚀
+
 on:
   release:
     types: [published]
+
 env:
   TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
   DYNAMO_TABLE: ${{ secrets.DYNAMO_TABLE }}
@@ -21,7 +23,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
+      - uses: serverless/github-action@v3.2
       - run: pip install -r requirements.txt
-      - run: npm install -g serverless
       - run: sls plugin install -n serverless-python-requirements
       - run: sls deploy
