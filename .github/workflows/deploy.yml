@@ -21,8 +21,10 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
-      - run: pip install -r requirements.txt
-      - uses: serverless/github-action@v3.2
+      - uses: actions/setup-node@v3
         with:
-          args: -c "serverless plugin install -n serverless-python-requirements && serverless deploy"
-          entrypoint: /bin/sh
+          node-version: 20
+      - run: pip install -r requirements.txt
+      - run: npm install -g serverless
+      - run: sls plugin install -n serverless-python-requirements
+      - run: sls deploy
