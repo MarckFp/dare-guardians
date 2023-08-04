@@ -13,8 +13,13 @@ def handler(event, _context):
     try:
         response = client.query(
             TableName=DYNAMO_TABLE,
-            IndexName='group',
-            KeyConditionExpression=Key('video_id').eq(GAME_PASSWORD)
+            IndexName='group-index',
+            KeyConditionExpression='group = :group_pass',
+            ExpressionAttributeValues={
+                ":group_pass": {
+                    'S': GAME_PASSWORD
+                }
+            },
         )
         print(response)
         #data = {"text": response.encode("utf8"), "chat_id": chat_id}
