@@ -23,6 +23,5 @@ def exit_game(chat_id, message, first_name):
             )
             response = f"Has sido eliminado correctamente del juego {first_name} =("
         except botocore.exceptions.ClientError as error:
-            if error.response['Error']['Code'] != 'ConditionalCheckFailedException':
-                raise
+            raise
     return response

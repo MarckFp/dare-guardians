@@ -29,6 +29,10 @@ def handler(event, _context):
             print("No implementado aún")
         if "/create" in message:
             print("No implementado aún")
+        if "/nominate" in message:
+            print("No implementado aún")
+        if "/leaderboard" in message:
+            print("No implementado aún")
 
         data = {"text": response.encode("utf8"), "chat_id": chat_id}
         url = BASE_URL + "/sendMessage"

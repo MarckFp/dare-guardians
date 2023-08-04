@@ -34,7 +34,7 @@ functions:
   guardians-listen:
     handler: main.handler
     description: "Lambda function in charge of answering the bot"
-    memorySize: 256
+    memorySize: 128
     timeout: 120
     environment:
       GAME_PASSWORD: ${env:GAME_PASSWORD}
@@ -45,6 +45,21 @@ functions:
       patterns:
         - "main.py"
         - "commands/**"
+  guardians-scheduler:
+    handler: scheduler.handler
+    description: "Lambda function in charge of sending the weekly dares"
+    memorySize: 128
+    timeout: 120
+    environment:
+      GAME_PASSWORD: ${env:GAME_PASSWORD}
+    layers:
+      - Ref: PythonRequirementsLambdaLayer
+    package:
+      patterns:
+        - "scheduler.py"
+        - "dares.json"
+    events:
+      - schedule: cron(0 10 * * 2 *)
 
 plugins:
   - serverless-python-requirements
