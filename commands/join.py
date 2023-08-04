@@ -2,6 +2,7 @@ import os
 import boto3
 
 def join_game(chat_id, message, first_name, last_name, username):
+    print("Executed Join command")
     DYNAMO_TABLE = os.getenv('DYNAMO_TABLE')
     GAME_PASSWORD = os.getenv('GAME_PASSWORD')
     client = boto3.client('dynamodb')
