@@ -31,10 +31,10 @@ def join_game(chat_id, message, first_name, last_name, username):
                     'S': 'None'
                 },
                 'attempts': {
-                    'N': 0
+                    'N': '0'
                 },
                 'score': {
-                    'N': 0
+                    'N': '0'
                 },
                 'group': {
                     'S': GAME_PASSWORD
