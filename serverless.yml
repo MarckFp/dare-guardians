@@ -38,11 +38,12 @@ functions:
     environment:
       GAME_PASSWORD: ${env:GAME_PASSWORD}
     url: true
+    layers:
+      - Ref: PythonRequirementsLambdaLayer
     package:
       patterns:
         - "main.py"
         - "commands/**"
-        - "requirements.txt"
 
 plugins:
   - serverless-python-requirements
