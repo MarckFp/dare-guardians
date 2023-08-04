@@ -59,7 +59,7 @@ functions:
         - "scheduler.py"
         - "dares.json"
     events:
-      - schedule: cron(0 10 * * 2 *)
+      - schedule: cron(0 10 ? * 2 *)
 
 plugins:
   - serverless-python-requirements
