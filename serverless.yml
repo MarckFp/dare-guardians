@@ -33,6 +33,7 @@ package:
 functions:
   guardians-listen:
     handler: main.handler
+    description: "Lambda function in charge of answering the bot"
     memorySize: 256
     timeout: 120
     environment:
