@@ -1,6 +1,7 @@
 import os
 import json
 import requests
+import boto3
 
 TOKEN = os.getenv('TELEGRAM_TOKEN')
 BASE_URL = f"https://api.telegram.org/bot{TOKEN}"
