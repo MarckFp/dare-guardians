@@ -8,8 +8,8 @@ def join_game(chat_id, message, first_name, last_name, username):
     client = boto3.client('dynamodb')
     response = "Contraseña incorrecta, grupo no encontrado"
     #TODO: Add some type of rate limit by chat_id
-    print(message)
-    print(message.split(" "))
+    if " " not in message:
+        return "Porfavor introduce una contraseña o grupo"
     input_password = message.split(" ")[1]
     if input_password == GAME_PASSWORD:
         client.put_item(
