@@ -2,7 +2,7 @@ import os
 import boto3
 import botocore
 
-def join_game(chat_id, message, first_name):
+def exit_game(chat_id, message, first_name):
     print("Executed Exit command")
     DYNAMO_TABLE = os.getenv('DYNAMO_TABLE')
     GAME_PASSWORD = os.getenv('GAME_PASSWORD')
