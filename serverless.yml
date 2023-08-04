@@ -52,4 +52,3 @@ custom:
   pythonRequirements:
     slim: true
     layer: true
-    
