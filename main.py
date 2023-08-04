@@ -2,6 +2,7 @@ import os
 import json
 import requests
 from commands.join import join_game
+from commands.exit import exit_game
 
 TOKEN = os.getenv('TELEGRAM_TOKEN')
 BASE_URL = f"https://api.telegram.org/bot{TOKEN}"
@@ -19,10 +20,15 @@ def handler(event, _context):
         print(f"username: {username}")
 
         if "/start" in message:
-            response = f"¡Hola {first_name}!\nEsto es Dare Guardians, un entretenido juego de retos con el que poder jugar con tus amigos. La idea del juego es simple, hay una serie de guardianes y un infiltrado, una vez a la semana un reto nuevo sale a la luz y se escoge un infiltrado al azar. El resto actuaran como guardianes. La idea es intentar completar el reto sin que nadie se de cuenta.\n\n/join - Para poder empezar a jugar a Dare Guardians escribe el comando seguido de un espacio y el ID de tu grupo\n/rules - Para entender mejor las reglas (WIP)\n/create - Para crear un grupo de guardianes (WIP)\n/exit - Para salir del juego (WIP)"
-
+            response = f"¡Hola {first_name}!\nEsto es Dare Guardians, un entretenido juego de retos con el que poder jugar con tus amigos. La idea del juego es simple, hay una serie de guardianes y un infiltrado, una vez a la semana un reto nuevo sale a la luz y se escoge un infiltrado al azar. El resto actuaran como guardianes. La idea es intentar completar el reto sin que nadie se de cuenta.\n\n/join - Para poder empezar a jugar a Dare Guardians escribe el comando seguido de un espacio y el ID de tu grupo\n/rules - Para entender mejor las reglas (WIP)\n/create - Para crear un grupo de guardianes (WIP)\n/exit - Seguido de un espacio y el ID de tu grupo para salir del juego"
         if "/join" in message:
             response = join_game(chat_id, message, first_name, last_name, username)
+        if "/exit" in message:
+            response = exit_game(chat_id, message, first_name)
+        if "/rules" in message:
+            print("No implementado aún")
+        if "/create" in message:
+            print("No implementado aún")
 
         data = {"text": response.encode("utf8"), "chat_id": chat_id}
         url = BASE_URL + "/sendMessage"
