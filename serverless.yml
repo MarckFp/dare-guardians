@@ -42,6 +42,13 @@ functions:
       patterns:
         - "main.py"
         - "commands/**"
+        - "requirements.txt"
 
 plugins:
   - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    slim: true
+    layer: true
+    
