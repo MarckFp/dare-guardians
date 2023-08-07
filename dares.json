@@ -1,6 +1,23 @@
 {
-    "dares": [
+    "private_dares": [
         "Tocar el pie a #",
-        "Pedir un autografo a #"
+        "Pedir un autografo a #",
+        "No decir ni si ni no enfrente de otros jugadores",
+        "Decir ? veces a # que quieres comer tu comida favorita en el mismo día",
+        "Llevar vendado a # a algún lugar",
+        "Contarle un chiste malo a #",
+        "Decirle un piropo a #",
+        "Tirar ? veces el mismo objeto enfrente de #",
+        ""
+    ],
+    "public_dares": [
+        ""
+    ],
+    "global_dares": [
+        "Nadie puede decir ni si ni no ni blanco ni negro",
+        "Todos tienen que saludarse en ingles",
+        "Todos tienen que saludarse en coreano",
+        "Todos tienen que saludarse en japones",
+        ""
     ]
 }
